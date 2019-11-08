@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSmurf } from '../../actions/App';
+import { fetchSmurf, removeSmurf } from '../../actions/App';
+import Smurf from './Smurf';
 
 const SmurfList = props => {
-  console.log('Smurf', props);
   return (
     <div>
-      <button onClick={() => props.dispatch(fetchSmurf())}>Get Smurf</button>
+      <button onClick={() => props.dispatch(fetchSmurf())}>Get Smurfs</button>
       {props.isFetching && <span role='img' aria-label='loading'>🔃</span>}
       {props.error && <div>{props.error.message}</div>}
       <ul>
-        {props.smurf.map(s => (
+        {props.smurf[0] ? props.smurf.map(s => (
           <li key={s.id}>
-            <p>Name: {s.name}</p>
-            <p>Age: {s.age}</p>
-            <p>Height: {s.height}</p>
+           <Smurf key={s.id} smurf={s} />
+           <button onClick={() => props.dispatch(removeSmurf(s.id))}>Remove</button>
           </li>
-        ))}
+        )) : <h1>No Smurfs (get smurfs or add smurf)</h1>
+        }
       </ul>
     </div>
   );
@@ -24,6 +24,5 @@ const SmurfList = props => {
 
 
 export default connect(state => {
-  console.log('mapStateToProps.STATE', state);
   return state;
 })(SmurfList);

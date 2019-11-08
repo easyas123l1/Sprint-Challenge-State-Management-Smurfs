@@ -20,7 +20,7 @@ export function fetchSmurf() {
 
     return axios.get(`http://localhost:3333/smurfs`)
     .then(response => {
-      console.log('servers response', response);
+      // console.log('servers response', response);
       return response.data})
     .then(response2 => dispatch(smurfLoadSuccess(response2)))
     .catch(error => dispatch(smurfLoadFailure(error)));
@@ -38,6 +38,20 @@ export function addSmurf(name, age, height) {
     })
     .then(response => {
       console.log(response);
+      dispatch(smurfLoadSuccess(response.data))
+    })
+    .catch(error => dispatch(smurfLoadFailure(error)));
+  }
+}
+
+export function removeSmurf(id) {
+  console.log(id);
+  return function(dispatch) {
+    dispatch(smurfLoading());
+
+    return axios.delete(`http://localhost:3333/smurfs/${id}`)
+    .then(response => {
+      dispatch(smurfLoadSuccess(response.data))
     })
     .catch(error => dispatch(smurfLoadFailure(error)));
   }

@@ -7,7 +7,7 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
-  console.log('reducer', action);
+  // console.log('reducer', action);
   switch (action.type) {
     case FETCH_SMURF_LOADING:
       return {
