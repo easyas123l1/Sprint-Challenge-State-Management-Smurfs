@@ -12,7 +12,9 @@ const SmurfList = props => {
       <ul>
         {props.smurf.map(s => (
           <li key={s.id}>
-            {s.name}
+            <p>Name: {s.name}</p>
+            <p>Age: {s.age}</p>
+            <p>Height: {s.height}</p>
           </li>
         ))}
       </ul>
@@ -20,9 +22,6 @@ const SmurfList = props => {
   );
 };
 
-// const mapDispatchToProps = {
-//   fetchSmurf
-// }
 
 export default connect(state => {
   console.log('mapStateToProps.STATE', state);

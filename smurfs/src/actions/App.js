@@ -27,11 +27,15 @@ export function fetchSmurf() {
   }
 }
 
-export function addSmurf() {
+export function addSmurf(name, age, height) {
   return function(dispatch) {
     dispatch(smurfLoading());
 
-    return axios.post(`http://localhost:3333/smurfs`)
+    return axios.post(`http://localhost:3333/smurfs`, {
+      name: name,
+      age: age,
+      height: height
+    })
     .then(response => {
       console.log(response);
     })
